@@ -1,6 +1,5 @@
 var app = angular.module('ticket-app', []);
-
-var venueName = "Bristol Motor Speedway";
+var sport = 'nfl';
 var teamName = "Falcons";
 
 app.factory('ticketCall', function($http) {
@@ -11,7 +10,8 @@ app.factory('ticketCall', function($http) {
         url:'https://app.ticketmaster.com/discovery/v2/events.json?',
         params: {
           apikey: 'E8VNq1LttN0VP5ql6bYc28kSUXfNpFjG',
-          keyword: 'NASCAR Sprint Cup Series'
+          keyword: teamName,
+          classificationName: sport
         }
       }).success(function(ticketData) {
           console.log(ticketData);
