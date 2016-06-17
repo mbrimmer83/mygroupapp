@@ -16,9 +16,27 @@ app.factory('nascarCall', function($http) {
   };
 });
 
-app.controller('NascarController', function($http, $scope, nascarCall) {
+app.controller('NascarController', function($http, $scope, nascarCall, nflCall) {
   nascarCall.getNascarSchedule(function(nascarScheduleData) {
     var nascarScheduleResults = nascarScheduleData.events;
     $scope.results = nascarScheduleResults;
   });
+  nflCall.getNflSchedule(function(nflScheduleData) {
+    var nflScheduleResults = nflScheduleData.weeks;
+  });
+});
+
+app.factory('nflCall', function($http) {
+  return {
+    getNflSchedule: function(callback) {
+      $http({
+        method: 'GET',
+        url: '/nflschedule.JSON'
+
+      }).success(function(nflScheduleData) {
+          console.log(nflScheduleData);
+          callback(nflScheduleData);
+        });
+    }
+  };
 });
